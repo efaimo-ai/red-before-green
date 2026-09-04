@@ -1,5 +1,9 @@
 # red-before-green
 
+[![license](https://img.shields.io/badge/license-Apache--2.0-0b7285)](LICENSE)
+[![grade](https://img.shields.io/badge/efaimo%20check--skill-A%20(100)-0b7285)](https://efaimo.ai/skills)
+[![house-style](https://github.com/efaimo-ai/red-before-green/actions/workflows/house-style.yml/badge.svg)](https://github.com/efaimo-ai/red-before-green/actions/workflows/house-style.yml)
+
 An Agent Skill for the moment a check comes back clean and you are about to
 believe it.
 
@@ -7,6 +11,26 @@ A green test, an empty grep, a linter with zero problems, a CI gate that passed,
 a subagent that reported "no issues". Each of these is either evidence or a
 decoration, and from the outside they look identical. The skill is one move that
 tells them apart: before you trust the green, make the check go red on purpose.
+
+## Why a green result is ambiguous
+
+```mermaid
+flowchart LR
+    A["a check ran, looked at<br/>everything, found nothing"] --> X{{"the output"}}
+    B["a check never ran, or<br/>could not have failed"] --> X
+    X --> Y["<b>0 problems</b>"]
+    Y --> Z["make the instrument produce<br/>a positive on purpose"]
+    Z --> V1["it goes red<br/><i>now the green means something</i>"]
+    Z --> V2["it stays green<br/><i>it was never watching</i>"]
+    classDef pass fill:#0b728522,stroke:#0b7285;
+    classDef fail fill:#c9282822,stroke:#c92828;
+    class V1 pass;
+    class B,V2 fail;
+```
+
+The two paths on the left produce the same bytes. Nothing downstream can tell
+them apart, which is why the only way to read a green is to have watched it be
+red first.
 
 ## The problem
 
@@ -72,12 +96,25 @@ It does not tell you your work is correct. It tells you whether the check that
 just told you your work is correct can be believed - which is a different, smaller,
 and usually skipped question.
 
-## Related
 
-[`claim-sweep`](https://github.com/efaimo-ai/claim-sweep) applies one corner of
-this to the case of a fact that changed and left stale copies behind.
-[`efaimo`](https://github.com/efaimo-ai/efaimo) audits the quality and context
-cost of MCP servers and Agent Skills, including this one.
+## The set
+
+Seven skills, each one a discipline that cost something to learn.
+
+| skill | the question it asks |
+|---|---|
+| **`red-before-green`** (this one) | can this check fail at all? |
+| [`denominator`](https://github.com/efaimo-ai/denominator) | how much of the world can it see? |
+| [`read-back`](https://github.com/efaimo-ai/read-back) | did the write actually apply? |
+| [`claim-sweep`](https://github.com/efaimo-ai/claim-sweep) | what else still asserts the old value? |
+| [`unreleased-guard`](https://github.com/efaimo-ai/unreleased-guard) | does the copy describe what shipped? |
+| [`honest-chart`](https://github.com/efaimo-ai/honest-chart) | is the picture proportional to the data? |
+| [`mcp-stateless-migration`](https://github.com/efaimo-ai/mcp-stateless-migration) | does this server match the 2026-07-28 spec? |
+
+All of them are audited by [`efaimo`](https://github.com/efaimo-ai/efaimo), the
+CLI that measures the quality and context-window cost of MCP servers and Agent
+Skills. The index of every public skill it can find, graded, is at
+[efaimo.ai/skills](https://efaimo.ai/skills).
 
 ## License
 
