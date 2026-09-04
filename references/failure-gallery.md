@@ -79,9 +79,54 @@ number, no command, no file to open, is a claim with nothing under it. It is
 indistinguishable from "I did not look". Require one openable artifact per
 load-bearing claim, and open one.
 
+## Every check was green and none of them looked at the thing
+
+The hardest version is not one broken instrument. It is a full set of working
+instruments, all pointed slightly to the side of the property that matters.
+
+An Agent Skill is a markdown file whose YAML frontmatter carries its name and
+the description a host selects it by. An edit put an unquoted colon inside that
+description. In YAML, `key: value with: a colon` is not a scalar, so the
+frontmatter stopped parsing: no name, no description, a skill no host could ever
+select.
+
+What the repository said about itself at that moment:
+
+```
+node --test                     12/12 passing
+check-house-style               12 files clean, no em or en dash
+npx <skill> --dir /tmp          installed 3 files, bytes verified
+npx <skill> --check             installed and current
+```
+
+Every one of those is true. The tests exercise the installer, and the installer
+copies bytes without caring what is in them. The house style checker reads the
+file as text. The install verified byte-for-byte that the broken file was
+faithfully reproduced. Four green results, all honest, all about something other
+than whether the artifact still works.
+
+The tool that would have said so was published by the same organisation and had
+never been pointed at its own skills:
+
+```
+$ npx efaimo check --skill ./SKILL.md
+grade F (55)   3 errors
+  x S101  frontmatter YAML parse error at line 2, column 14
+  x S101  required field `name` is missing
+  x S101  required field `description` is missing
+```
+
+The tell was available and nobody had asked for it. Coverage of instruments is
+not the same as coverage of properties: list what would have to be true for the
+artifact to be worth shipping, and check that each one has an instrument pointed
+at it, rather than counting the instruments you happen to run.
+
 ---
 
 The common thread: in every case, the instrument's silence was read as the
 absence of a problem, when it was really the absence of a measurement. The fix is
 always the same one move - make the instrument produce a positive on purpose, and
 watch it, before you trust the negative.
+
+And when every instrument is green, ask the second question: which property is
+each one actually about, and is the property you care about on that list.
