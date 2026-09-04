@@ -1,0 +1,44 @@
+{
+  "name": "red-before-green",
+  "version": "0.1.0",
+  "description": "before trusting any check that came back clean - a grep or search with no matches, a test suite or linter reporting zero problems, a green CI gate, a build or type-check that passed, a...",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "efaimo ai (https://efaimo.ai)",
+  "homepage": "https://efaimo.ai/skills",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/efaimo-ai/red-before-green.git"
+  },
+  "bugs": {
+    "url": "https://github.com/efaimo-ai/red-before-green/issues"
+  },
+  "keywords": [
+    "agent-skill",
+    "agent-skills",
+    "claude",
+    "claude-code",
+    "ai-agents",
+    "mcp"
+  ],
+  "bin": {
+    "red-before-green": "bin/install.mjs"
+  },
+  "files": [
+    "SKILL.md",
+    "references",
+    "bin",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "house-style": "node scripts/check-house-style.mjs"
+  },
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
+  }
+}

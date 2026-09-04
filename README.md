@@ -1,5 +1,6 @@
 # red-before-green
 
+[![npm](https://img.shields.io/npm/v/red-before-green?color=0b7285&label=npm)](https://www.npmjs.com/package/red-before-green)
 [![license](https://img.shields.io/badge/license-Apache--2.0-0b7285)](LICENSE)
 [![grade](https://img.shields.io/badge/efaimo%20check--skill-A%20(100)-0b7285)](https://efaimo.ai/skills)
 [![house-style](https://github.com/efaimo-ai/red-before-green/actions/workflows/house-style.yml/badge.svg)](https://github.com/efaimo-ai/red-before-green/actions/workflows/house-style.yml)
@@ -11,6 +12,27 @@ A green test, an empty grep, a linter with zero problems, a CI gate that passed,
 a subagent that reported "no issues". Each of these is either evidence or a
 decoration, and from the outside they look identical. The skill is one move that
 tells them apart: before you trust the green, make the check go red on purpose.
+
+<!-- generated:install -->
+
+## Install
+
+```sh
+npx red-before-green                 # into ./.claude/skills/red-before-green/
+npx red-before-green --global        # into ~/.claude/skills/red-before-green/
+npx red-before-green --check         # installed, and current?
+```
+
+The package is the skill: `SKILL.md` and its `references/`, nothing else. The
+installer copies them, reads every byte back, and fails if what landed is not
+what it wrote. It refuses to overwrite a directory whose contents differ unless
+you pass `--force`, and installing the same version twice is a success rather
+than a conflict.
+
+Or take it by hand. It is markdown; `npx red-before-green --print` writes `SKILL.md` to
+stdout, and the repository is the whole thing.
+
+<!-- /generated:install -->
 
 ## Why a green result is ambiguous
 
@@ -96,6 +118,34 @@ It does not tell you your work is correct. It tells you whether the check that
 just told you your work is correct can be believed - which is a different, smaller,
 and usually skipped question.
 
+
+<!-- generated:pipeline -->
+
+## What installing it does to a session
+
+A skill is not free just because it is markdown. Its frontmatter is loaded at
+the start of every session for every skill you have installed, whether or not it
+ever fires.
+
+```mermaid
+flowchart LR
+    N["npx red-before-green"] --> D[/".claude/skills/red-before-green/"/]
+    D --> M["frontmatter<br/><b>every session, always</b>"]
+    D --> B["SKILL.md body<br/><i>only when it triggers</i>"]
+    D --> R["references/<br/><i>only if the agent reads them</i>"]
+    M --> S(["your context window"])
+    B -.->|"on trigger"| S
+    R -.->|"on demand"| S
+    classDef always fill:#c9282822,stroke:#c92828,stroke-width:1px;
+    classDef lazy fill:#0b728522,stroke:#0b7285,stroke-width:1px;
+    class M always;
+    class B,R lazy;
+```
+
+In this skill's case, measured by [efaimo](https://github.com/efaimo-ai/efaimo) `weigh` (v0.5.0, 2026-09-04):
+**115 tokens always resident**, 984 when it triggers, 2,146 across 2 reference files if the agent reads to the end.
+
+<!-- /generated:pipeline -->
 
 ## The set
 
