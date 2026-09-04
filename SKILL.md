@@ -1,11 +1,11 @@
 ---
 name: red-before-green
-description: Use before trusting any check that came back clean - a grep or search with no matches, a test suite or linter reporting zero problems, a green CI gate, a build or type-check that passed, a query that returned an empty set, a validation that succeeded, or a subagent or tool that reported success - whenever you are about to conclude a task is done, report "no issues found", or act on that result. Makes the instrument produce a positive on purpose first, because an empty result and a check that never ran produce identical output.
+description: Use before trusting any check that came back clean - a grep or search with no matches, a test suite or linter reporting zero problems, a green CI gate, a build or type-check that passed, a query that returned an empty set, a validation that succeeded, or a subagent or tool that reported success. Applies whenever you are about to call a task done or report "no issues found". An empty result and a check that never ran look identical.
 license: Apache-2.0
 metadata:
   version: "0.1.0"
   homepage: "https://efaimo.ai"
-  verified_against: "2026-08-03"
+  verified_against: "2026-09-04"
 ---
 
 # red-before-green
@@ -87,11 +87,13 @@ you your work is correct. It tells you whether the thing that just told you your
 work is correct can be believed. That is a smaller claim, and it is the one that
 was missing.
 
-## Related
+<!-- generated:siblings -->
 
-- `claim-sweep` applies one corner of this - an instrument that harvests zero
-  matches should be red, not green - to the narrow case of a fact that changed
-  and left stale copies. `red-before-green` is the whole discipline, for any
-  clean result from any instrument.
-- [efaimo](https://github.com/efaimo-ai/efaimo) audits the quality and context
-  cost of MCP servers and Agent Skills, including this one.
+## Siblings
+
+Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.ai/skills
+
+- `denominator` - once the check can fail, ask how much of the world it actually looked at.
+- `read-back` - the same move aimed at writes rather than checks: a success that never applied.
+
+<!-- /generated:siblings -->
