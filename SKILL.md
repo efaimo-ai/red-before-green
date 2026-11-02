@@ -4,7 +4,7 @@ description: Use before trusting any check that came back clean - a grep or sear
 license: Apache-2.0
 metadata:
   version: "0.1.0"
-  homepage: "https://efaimo.ai"
+  homepage: "https://efaimo.com"
   verified_against: "2026-09-04"
 ---
 
@@ -91,7 +91,7 @@ was missing.
 
 ## Siblings
 
-Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.ai/skills
+Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.com/skills
 
 - `denominator` - once the check can fail, ask how much of the world it actually looked at.
 - `read-back` - the same move aimed at writes rather than checks: a success that never applied.
