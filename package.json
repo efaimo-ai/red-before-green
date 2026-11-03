@@ -1,7 +1,7 @@
 {
   "name": "red-before-green",
   "version": "0.1.0",
-  "description": "before trusting any check that came back clean - a grep or search with no matches, a test suite or linter reporting zero problems, a green CI gate, a build or type-check that passed, a...",
+  "description": "Use before trusting any check that came back clean.",
   "type": "module",
   "license": "Apache-2.0",
   "author": "efaimo ai (https://efaimo.ai)",
