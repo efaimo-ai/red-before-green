@@ -94,27 +94,21 @@ What the repository said about itself at that moment:
 
 ```
 node --test                     12/12 passing
-check-house-style               12 files clean, no em or en dash
-npx <skill> --dir /tmp          installed 3 files, bytes verified
-npx <skill> --check             installed and current
+style check                     12 files clean
+installer --dir /tmp            installed 3 files, bytes verified
+installer --check               installed and current
 ```
 
 Every one of those is true. The tests exercise the installer, and the installer
-copies bytes without caring what is in them. The house style checker reads the
+copies bytes without caring what is in them. The style checker reads the
 file as text. The install verified byte-for-byte that the broken file was
 faithfully reproduced. Four green results, all honest, all about something other
 than whether the artifact still works.
 
-The tool that would have said so was published by the same organisation and had
-never been pointed at its own skills:
-
-```
-$ npx efaimo check --skill ./SKILL.md
-grade F (55)   3 errors
-  x S101  frontmatter YAML parse error at line 2, column 14
-  x S101  required field `name` is missing
-  x S101  required field `description` is missing
-```
+A validator that would have said so was already available and had never been
+pointed at the skills: `skills-ref validate ./my-skill`, or
+`claude plugin validate .` for a plugin, reports a SKILL.md whose frontmatter
+does not parse.
 
 The tell was available and nobody had asked for it. Coverage of instruments is
 not the same as coverage of properties: list what would have to be true for the

@@ -54,9 +54,10 @@ that they cover the change, or that they are not asserting the bug.
 
 ## CI gate: green
 
-- **Positive:** in a scratch branch or commit, break exactly the thing the gate
-  claims to enforce, push, and confirm the gate goes red. This is the only proof
-  that a required check is actually required and actually wired.
+- **Positive:** on a scratch branch that deploys nothing, break exactly the
+  thing the gate claims to enforce and confirm the gate goes red. Ask before
+  pushing it. This is the only proof that a required check is actually
+  required and actually wired.
 - **Traps:** a gate whose script exits 0 regardless (a `|| true`, a missing
   `set -e`, an exit code read from the wrong stage of a pipe); a check that is not
   in the branch's required set; a matrix cell that was skipped.

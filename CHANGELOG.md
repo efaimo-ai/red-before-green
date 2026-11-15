@@ -30,10 +30,24 @@ All notable changes to red-before-green are documented here. Format follows
   run that packs the package the way npm would, installs it from that tarball,
   and installs the skill from there.
 
+### Changed
+
+- The description draws its boundary: a write that reported success goes to
+  `read-it-back`, and how many items a passing check covered goes to
+  `denominator`. It no longer fires on every "I am about to call this done".
+- New "Sabotage safely": break a copy, a fixture or a scratch branch, ask before
+  pushing a commit meant to turn CI red, restore in the same step, and call the
+  result unverified when you cannot run the check yourself.
+- New "Report it": a three-line template that shows the red you saw.
+- The CI gate recipe asks before pushing, and the failure gallery uses generic
+  tool names and validators anyone can run (`skills-ref validate`,
+  `claude plugin validate`).
+- "Why this matters more now" and "What this is not" are gone; they argued and
+  changed nothing an agent does.
+
 ### Notes
 
-- The skill's own content did not change for this release. It grades A(100) on
-  `efaimo check --skill` before and after, and the package version and the
-  version in `SKILL.md` frontmatter are one number, pinned by a test.
+- The package version and the version in `SKILL.md` frontmatter are one number,
+  pinned by a test.
 
 [Unreleased]: https://github.com/efaimo-ai/red-before-green/commits/main

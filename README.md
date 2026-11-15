@@ -115,9 +115,13 @@ references load only when a specific instrument needs them.
 
 A search returns no matches. A test suite, linter, or type-checker reports zero
 problems. A CI gate is green. A query comes back with an empty set. A validation
-passes. A subagent or tool reports success. In each case, before you conclude the
-task is done or report "no issues found", you make the check produce a positive
-first.
+passes. A subagent reports "no issues". In each case, before you accept the
+clean result as evidence, you make the check produce a positive first, on a copy
+or a scratch branch rather than the real thing.
+
+Two neighbours take the moments next to it: `read-it-back` when a write reported
+success, and `denominator` when the question is how many items a passing check
+covered.
 
 ## The part worth reading even if you never install it
 

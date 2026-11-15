@@ -1,6 +1,6 @@
 ---
 name: red-before-green
-description: Use before trusting any check that came back clean - a grep or search with no matches, a test suite or linter reporting zero problems, a green CI gate, a build or type-check that passed, a query that returned an empty set, a validation that succeeded, or a subagent or tool that reported success. Applies whenever you are about to call a task done or report "no issues found". An empty result and a check that never ran look identical.
+description: Use before accepting a clean result as evidence - a grep or search with no matches, a test suite, linter, type-check or CI gate that passed, a validator that accepted, an empty query result, or a subagent's "no issues found". Also use when someone asks whether a passing check can be believed. Make the check fail once on an input that must fail, then trust its green. For a write that reported success use read-it-back; for how many items a passing check covered use denominator.
 license: Apache-2.0
 metadata:
   version: "0.1.0"
@@ -37,14 +37,29 @@ If step 2 is impossible - you cannot construct any input that makes the check
 fail - stop. The check is not measuring anything, and neither you nor anyone
 reading its green knows what it verifies.
 
-## Why this matters more now
+## Sabotage safely
 
-Agents generate and run enormous amounts of verification - tests, linters,
-type-checks, greps, CI gates - and hand whole investigations to subagents that
-report back "done" or "clean". The more checking is automated and the less of it
-anyone watches, the more the dominant failure becomes the vacuous pass: the check
-that reported clean because it examined nothing. Volume of green is not evidence.
-One watched red is.
+Break a copy before you break the real thing: a temp file, a fixture, a
+scratch branch or a worktree. Never sabotage the default branch, and ask
+before pushing a commit whose only purpose is to turn CI red, because a push
+can deploy or notify people. Restore in the same step that sabotaged, then
+re-run once and see green again.
+
+If you cannot run the check yourself (a pasted log, a chat with no shell),
+name the input that must fail and ask the user to run it. Until then, call
+the result unverified.
+
+## Report it
+
+When you report a clean result, show the red you saw:
+
+    check:     npm test (214 tests)
+    positive:  negated the assertion in test/discount.test.ts:12
+    result:    1 failing as expected; restored; 214 passing
+
+If no input could make the check fail, say that instead of "passes". A watched
+red makes the check believable. It does not make the work correct, so report
+what the check covers and no more.
 
 ## The tells
 
@@ -72,20 +87,13 @@ Full recipes, with the traps that disguise a non-result, are in
 | linter / type-check: 0 problems | one deliberate violation |
 | CI gate: green | one rule broken in a scratch commit |
 | schema / contract: valid | a payload that must be rejected |
-| subagent / tool: success | one load-bearing claim, spot-checked yourself |
+| subagent: "no issues" | one load-bearing claim, spot-checked yourself |
 | query / API: empty set | a query you know returns rows, same connection |
 | monitor / alert: quiet | a synthetic event that must trigger it |
 
 For the shapes these non-results take in the wild - the pipe that ate the exit
 code, the regex that lost a backslash in transit, the mock that passed without
 exercising anything - see [references/failure-gallery.md](references/failure-gallery.md).
-
-## What this is not
-
-There is nothing to install; this is a discipline, not a tool. It does not tell
-you your work is correct. It tells you whether the thing that just told you your
-work is correct can be believed. That is a smaller claim, and it is the one that
-was missing.
 
 <!-- generated:siblings -->
 
