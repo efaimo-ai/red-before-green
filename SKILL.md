@@ -94,6 +94,6 @@ was missing.
 Every skill in this set is about a report that was true about the wrong thing. The set: https://efaimo.com/skills
 
 - `denominator` - once the check can fail, ask how much of the world it actually looked at.
-- `read-back` - the same move aimed at writes rather than checks: a success that never applied.
+- `read-it-back` - the same move aimed at writes rather than checks: a success that never applied.
 
 <!-- /generated:siblings -->
