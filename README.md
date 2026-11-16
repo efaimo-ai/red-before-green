@@ -1,5 +1,6 @@
 # red-before-green
 
+[![npm](https://img.shields.io/npm/v/red-before-green?color=0b7285&label=npm)](https://www.npmjs.com/package/red-before-green)
 [![license](https://img.shields.io/badge/license-Apache--2.0-0b7285)](LICENSE)
 [![grade](https://img.shields.io/badge/efaimo%20check--skill-A%20(100)-0b7285)](https://efaimo.com/skills)
 [![house-style](https://github.com/efaimo-ai/red-before-green/actions/workflows/house-style.yml/badge.svg)](https://github.com/efaimo-ai/red-before-green/actions/workflows/house-style.yml)
@@ -18,31 +19,14 @@ tells them apart: before you trust the green, make the check go red on purpose.
 
 ```sh
 # into ./.claude/skills/red-before-green/
-npx -y --allow-git=all github:efaimo-ai/red-before-green
+npx red-before-green
 
 # into ~/.claude/skills/red-before-green/, for every project
-npx -y --allow-git=all github:efaimo-ai/red-before-green --global
+npx red-before-green --global
 
 # installed already, and still current?
-npx -y --allow-git=all github:efaimo-ai/red-before-green --check
+npx red-before-green --check
 ```
-
-That is the repository, not the registry, and it is deliberate: `red-before-green` is
-not on npm yet, and printing `npx red-before-green` today would advertise a command that
-404s.
-
-`--allow-git=all` is there because npm 12 refuses git specs by default
-(`EALLOWGIT`), and it is the only value that helps: a narrower
-`--allow-git=<spec>` is still refused. **You should not enjoy typing it.**
-Switching off a protection npm added on purpose is a poor way to install
-anything, and the honest alternative is that this skill is markdown: copy
-`SKILL.md` and its `references/` into `.claude/skills/red-before-green/` and you are
-done, with nothing to trust.
-
-Both of those go away when the package publishes, because `npx red-before-green` needs
-no flag on either npm major. This README is regenerated from a committed
-registry probe, so that sentence changes itself rather than waiting for someone
-to remember it.
 
 The package is the skill: `SKILL.md` and its `references/`, nothing else. The
 installer copies them, reads every byte back, and fails if what landed is not
@@ -50,7 +34,7 @@ what it wrote. It refuses to overwrite a directory whose contents differ unless
 you pass `--force`, and installing the same version twice is a success rather
 than a conflict.
 
-Or take it by hand. It is markdown; `npx -y --allow-git=all github:efaimo-ai/red-before-green --print` writes `SKILL.md` to
+Or take it by hand. It is markdown; `npx red-before-green --print` writes `SKILL.md` to
 stdout, and the repository is the whole thing.
 
 <!-- /generated:install -->
@@ -164,8 +148,8 @@ the start of every session for every skill you have installed, whether or not it
 ever fires.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/red-before-green/main/assets/diagram-18654f255a-dark.png">
-  <img alt="Installing puts SKILL.md and references/ in .claude/skills/red-before-green/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them." src="https://raw.githubusercontent.com/efaimo-ai/red-before-green/main/assets/diagram-18654f255a-light.png" width="756">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/red-before-green/main/assets/diagram-cce208c3d7-dark.png">
+  <img alt="Installing puts SKILL.md and references/ in .claude/skills/red-before-green/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them." src="https://raw.githubusercontent.com/efaimo-ai/red-before-green/main/assets/diagram-cce208c3d7-light.png" width="756">
 </picture>
 
 <details>
@@ -174,7 +158,7 @@ ever fires.
 ```text
 flowchart TD
     accDescr: Installing puts SKILL.md and references/ in .claude/skills/red-before-green/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them.
-    N["npx -y --allow-git=all github:efaimo-ai/red-before-green"] --> D[/".claude/skills/red-before-green/"/]
+    N["npx red-before-green"] --> D[/".claude/skills/red-before-green/"/]
     D --> M["frontmatter<br/><b>every session, always</b>"]
     D --> B["SKILL.md body<br/><i>only when it triggers</i>"]
     D --> R["references/<br/><i>only if the agent reads them</i>"]
