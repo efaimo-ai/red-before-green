@@ -173,7 +173,7 @@ flowchart TD
 
 </details>
 
-In this skill's case, measured by [efaimo](https://github.com/efaimo-ai/efaimo) `weigh` (v0.6.1, 2026-11-16):
+In this skill's case, measured by [efaimo](https://github.com/efaimo-ai/efaimo) `weigh` (v0.6.2, 2026-11-16):
 **108 tokens always resident**, 1,033 when it triggers, 2,550 across 2 reference files if the agent reads to the end.
 
 <!-- /generated:pipeline -->
