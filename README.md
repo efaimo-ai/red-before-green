@@ -57,8 +57,17 @@ stdout, and the repository is the whole thing.
 
 ## Why a green result is ambiguous
 
-```mermaid
-flowchart LR
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/red-before-green/main/assets/diagram-edb6788c85-dark.png">
+  <img alt="A check that looked at everything and found nothing, and a check that never ran or could not have failed, give the same output, 0 problems. Make the instrument produce a positive on purpose. If it goes red, the green means something. If it stays green, it was never watching." src="https://raw.githubusercontent.com/efaimo-ai/red-before-green/main/assets/diagram-edb6788c85-light.png" width="601">
+</picture>
+
+<details>
+<summary>Mermaid source</summary>
+
+```text
+flowchart TD
+    accDescr: A check that looked at everything and found nothing, and a check that never ran or could not have failed, give the same output, 0 problems. Make the instrument produce a positive on purpose. If it goes red, the green means something. If it stays green, it was never watching.
     A["a check ran, looked at<br/>everything, found nothing"] --> X{{"the output"}}
     B["a check never ran, or<br/>could not have failed"] --> X
     X --> Y["<b>0 problems</b>"]
@@ -70,6 +79,8 @@ flowchart LR
     class V1 pass;
     class B,V2 fail;
 ```
+
+</details>
 
 The two paths on the left produce the same bytes. Nothing downstream can tell
 them apart, which is why the only way to read a green is to have watched it be
@@ -152,8 +163,17 @@ A skill is not free just because it is markdown. Its frontmatter is loaded at
 the start of every session for every skill you have installed, whether or not it
 ever fires.
 
-```mermaid
-flowchart LR
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/red-before-green/main/assets/diagram-18654f255a-dark.png">
+  <img alt="Installing puts SKILL.md and references/ in .claude/skills/red-before-green/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them." src="https://raw.githubusercontent.com/efaimo-ai/red-before-green/main/assets/diagram-18654f255a-light.png" width="756">
+</picture>
+
+<details>
+<summary>Mermaid source</summary>
+
+```text
+flowchart TD
+    accDescr: Installing puts SKILL.md and references/ in .claude/skills/red-before-green/. The frontmatter enters your context window in every session, the body only when the skill triggers, and the references only if the agent reads them.
     N["npx -y --allow-git=all github:efaimo-ai/red-before-green"] --> D[/".claude/skills/red-before-green/"/]
     D --> M["frontmatter<br/><b>every session, always</b>"]
     D --> B["SKILL.md body<br/><i>only when it triggers</i>"]
@@ -166,6 +186,8 @@ flowchart LR
     class M always;
     class B,R lazy;
 ```
+
+</details>
 
 In this skill's case, measured by [efaimo](https://github.com/efaimo-ai/efaimo) `weigh` (v0.6.0, 2026-11-02):
 **97 tokens always resident**, 967 when it triggers, 2,601 across 2 reference files if the agent reads to the end.
@@ -189,8 +211,17 @@ Every skill in this set is about a report that was true about the wrong thing.
 | [`mcp-stateless-migration`](https://github.com/efaimo-ai/mcp-stateless-migration) | a server said ok | which revision it speaks |
 | [`efaimo`](https://github.com/efaimo-ai/efaimo) | a tool said A(100) | what a grade certifies, and what it costs |
 
-```mermaid
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/efaimo-ai/red-before-green/main/assets/diagram-e82f04afc5-dark.png">
+  <img alt="Every skill in the set and the efaimo CLI, with an edge for each handoff between two of them. red-before-green is highlighted." src="https://raw.githubusercontent.com/efaimo-ai/red-before-green/main/assets/diagram-e82f04afc5-light.png" width="758">
+</picture>
+
+<details>
+<summary>Mermaid source</summary>
+
+```text
 graph TD
+    accDescr: Every skill in the set and the efaimo CLI, with an edge for each handoff between two of them. red-before-green is highlighted.
     red_before_green["red-before-green"]
     denominator["denominator"]
     read_it_back["read-it-back"]
@@ -215,6 +246,8 @@ graph TD
     classDef self fill:#0b728533,stroke:#0b7285,stroke-width:2px;
     class red_before_green self;
 ```
+
+</details>
 
 Each edge is a real handoff, not a category: the reason one skill points at
 another is written into it at [efaimo.com/skills](https://efaimo.com/skills), and
